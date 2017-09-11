@@ -11,6 +11,7 @@
 \usepackage{amsmath}
 \usepackage{verbatim}
 \usepackage{graphicx} 
+\usepackage{epstopdf}
 
 \usetikzlibrary{automata,positioning}
 
@@ -30,7 +31,7 @@
 \pagestyle{fancy}
 \lhead{\hmwkAuthorName}
 %\chead{\hmwkClass\ (\hmwkClassInstructor): \hmwkTitle}
-\rhead{}
+\rhead{\hmwkAuthorUNI}
 \lfoot{\lastxmark}
 \cfoot{\thepage}
 
@@ -62,7 +63,7 @@
 
 \newenvironment{homeworkProblem}{
     \section{Problem \arabic{homeworkProblemCounter}}
-    \setcounter{partCounter}{1}
+    \setcounter{partCounter}{0}
     \enterProblemHeader{homeworkProblemCounter}
 }{
     \exitProblemHeader{homeworkProblemCounter}
@@ -84,6 +85,7 @@
 %\newcommand{\hmwkClassTime}{Section 005}
 \newcommand{\hmwkClassInstructor}{Professor Regina}
 \newcommand{\hmwkAuthorName}{Fan Yang}
+\newcommand{\hmwkAuthorUNI}{UNI: fy2232}
 
 %
 % Title Page
@@ -97,7 +99,8 @@
     \vspace{3in}
 }
 
-\author{\textbf{\hmwkAuthorName}}
+\author{\textbf{\hmwkAuthorName}\\
+    \text{\hmwkAuthorUNI}}
 \date{}
 
 \renewcommand{\part}[1]{\textbf{\large Part \Alph{partCounter}}\stepcounter{partCounter}\\}
@@ -130,6 +133,8 @@
 \begin{document}
 
 \maketitle
+\setcounter{page}{0}
+\thispagestyle{empty}
 
 \pagebreak
 
@@ -411,15 +416,24 @@
 \end{homeworkProblem}
 
 \begin{homeworkProblem}     %8
+
+    \textbf{(1)}
     \[
         \begin{split}
-        &\text{denote event E as }\\
-        &so~P=\frac{1}{2}*p+\frac{1}{2}*p=p\\
-        &\text{under strategy (b),the answer could be correct in the following situations:.}\\
-        &\text{1)husband correct wife correct and either of their answer to be given.}\\
-        &so~P=p*p+\frac{1}{2}*p*(1-p)+\frac{1}{2}*p*(1-p)
-        =p\\
-        &\text{therefore,the two strategies have same efficiency.}\\
+        &Pr(agree)=p*p+(1-p)*(1-p)=2p^2-2p+1\\
+        &\text{from problem 7 we know }Pr(correct)=p\\
+        &Pr(correct|agree)=\frac{Pr(correct\cap agree)}{Pr(agree)}
+        =\frac{p*p}{2p^2-2p+1}=\frac{9}{13}\\
+        \end{split}
+    \]
+    
+    \textbf{(2)}
+    \[
+        \begin{split}
+        &Pr(disagree)=p*(1-p)+(1-p)*p=2p(1-p)\\
+        &Pr(correct\cap disagree)=\frac{1}{2}*p*(1-p)+\frac{1}{2}(1-p)*p=p(1-p)\\
+        &Pr(correct|disagree)=\frac{Pr(correct\cap disagree)}{Pr(disagree)}
+        =\frac{p(1-p)}{2p(1-p)}=\frac{1}{2}\\
         \end{split}
     \]
 
