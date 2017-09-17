@@ -10,7 +10,7 @@
 \usepackage{algpseudocode}
 \usepackage{amsmath}
 \usepackage{verbatim}
-\usepackage{graphicx} 
+\usepackage{graphicx}
 \usepackage{epstopdf}
 
 \usetikzlibrary{automata,positioning}
@@ -171,7 +171,7 @@
             \\
             2)&~A \cap B = \{(H,H,T),(H,H,H)\}=B
             \\
-            3)&~A \cup C = \{ (H,H,T)\}
+            3)&~A \cup C = \{ (H,H,T),(H,T,H),(T,H,H),(H,H,H),(H,T,T),(T,H,T),(T,T,T)\}
         \end{split}
     \]
 
@@ -210,10 +210,10 @@
     \[
         \begin{split}
             &\text{there are 13 choices of value}\\
-            &\text{there are 4 choices of suit}\\
+            &\text{as for the other card, there are 48 choices}
             \\
-            &P= \frac{13*4}{\left( \begin{array}{c}52\\5\end{array} \right)}\\
-            &~~=\frac{1}{49980}
+            &P= \frac{13*48}{\left( \begin{array}{c}52\\5\end{array} \right)}\\
+            &~~=\frac{1}{4165}
         \end{split}
     \]
     \textbf{(d)}
@@ -233,23 +233,21 @@
 
     \[
         \begin{split}
-            &\text{After chose value for the 3 cards ,there are only 12 choices for the other 2 cards. }\\
-            &\text{There are 13*12*11 choices of value for no repeated value of the other 2 cards.}\\
-            &\text{In this situation there are 4*4*4 choices of suit.}\\
-            &\text{Besides there are 13*12 choices of value for a pair.}\\
-            &\text{in this situation there are 4*4*3 choices of suit.}\\
-            &P= \frac{(13*12*11)*(4*4*4)+(13*12)*(4*4*3)}{\left( \begin{array}{c}52\\5\end{array} \right)}\\
-            &~~=\frac{188}{4165}
+            &\text{Choose 3 same cards first:There are 13 choices of value and $\left( \begin{array}{c}4\\3\end{array} \right)$ choices of suit}\\
+            &\text{As for the other two cards:There are $\left( \begin{array}{c}52-4\\2\end{array} \right)$ choices}\\
+            &P= \frac{13*4*\left( \begin{array}{c}52-4\\2\end{array} \right)}{\left( \begin{array}{c}52\\5\end{array} \right)}\\
+            &~~=\frac{94}{4165}
         \end{split}
     \]
     \textbf{(f)}
 
     \[
         \begin{split}
-            &\text{there are 13*12 choices of value.}\\
-            &there~are~\frac{4}{2} * \frac{4}{2}~choices~of~suit.\\
-            &P= \frac{(13*12)*\frac{4}{2}*\frac{4}{2}}{\left( \begin{array}{c}52\\5\end{array} \right)}\\
-            &~~=\frac{9}{4165}
+            &\text{there are $\left(\begin{array}{c}13\\2\end{array} \right)$ choices of value.}\\
+            &\text{there are $\left(\begin{array}{c}4\\2\end{array} \right)*\left(\begin{array}{c}4\\2\end{array} \right)$ choices of value.}\\
+            &\text{as for the last cards, there are only 52-4-4 choices.}\\
+            &P= \frac{\left(\begin{array}{c}13\\2\end{array} \right)*\left(\begin{array}{c}4\\2\end{array} \right)*\left(\begin{array}{c}4\\2\end{array} \right)*(52-4-4)}{\left( \begin{array}{c}52\\5\end{array} \right)}\\
+            &~~=\frac{198}{4165}
         \end{split}
     \]
 
@@ -306,8 +304,9 @@
         \begin{split}
     &\text{consider the event as inserting four adjacent aces into 48 shuffled cards}\\
     &\text{\# of order of adjacent aces are 4*3*2*1}\\
-    &\text{\# of choices of inserting the four adjacent are} \left(\begin{array}{c}49\\1\end{array}\right) \\
-    &therefore~P=\frac{4*3*2*1}{49}=\frac{24}{49}
+    &\text{\# of choices of inserting the four adjacent are 49!} \\
+    &\text{\# in sample space is 52!}\\
+    &therefore~P=\frac{4*3*2*49!}{52!}\approx 1.81\times 10^{-4}\\
         \end{split}
     \]
 \end{homeworkProblem}
@@ -426,7 +425,7 @@
         =\frac{p*p}{2p^2-2p+1}=\frac{9}{13}\\
         \end{split}
     \]
-    
+
     \textbf{(2)}
     \[
         \begin{split}
