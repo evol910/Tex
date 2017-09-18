@@ -192,7 +192,7 @@
     \[
         \begin{split}
             &\text{When $\beta_0$ is 0,we know that the regression model only determines by $\beta_1$,and the function line goes}\\
-            &\text{through origin the point and is a linear line which only depends on the slope.}\\
+            &\text{through origin point and is a linear line which only depends on the slope.}\\
         \end{split}
     \]
 
@@ -203,8 +203,7 @@
     \[
         \begin{split}
             &\text{When $\beta_1$ is 0,the response variable is a constant and no longer related to explanatory variable.}\\
-            &\text{which means $\beta_0$,and the function line goes through origin the point and is a linear line which}\\
-            &\text{only depends on the slope.}\\
+            &\text{And $Y_i$ always equal to $\beta_0$. The regression now becomes horizontal.}\\
         \end{split}
     \]
 
@@ -256,7 +255,8 @@
         =\frac{\overline{Y}_3-\overline{Y}_1}{10}\\
         \\
         &\text{2) in the 6 points regression}\\
-        &\widehat{\beta}_1^2=\frac{(5-10)[(Y_{11}-\overline{Y})+(Y_{12}-\overline{Y})]
+        &\widehat{\beta}_1^2=\\
+        &\frac{(5-10)[(Y_{11}-\overline{Y})+(Y_{12}-\overline{Y})]
         +(10-10)[(Y_{21}-\overline{Y})+(Y_{22}-\overline{Y})]
         +(15-10)[(Y_{32}-\overline{Y})+(Y_{33}-\overline{Y})]}
         {2*(5-10)^2+2*(10-10)^2+2*(15-10)^2}\\
@@ -300,9 +300,15 @@
         &\widehat{\beta}_1=\frac{\sum(x_i-\overline{x})(y_i-\overline{y})}{(\sum x_i-\overline{x})^2}\\
         &\widehat{\beta}_0=\overline{y}-\widehat{\beta}_1 \overline{x}\\
         &\text{since we know that $\beta_0=0$ }\\
-        &\text{then }0=\overline{y}-\widehat{\beta}_1 \overline{x}\\
-        &\overline{y}= \widehat{\beta}_1 \overline{x}\\
-        &\widehat{\beta}_1=\frac{\overline{y}}{\overline{x}}
+        &\text{now our goal is to minimize}\sum_i^n(y_i-\beta_1x_i)^2\\
+        &\sum_i^n(y_i-\beta_1x_i)^2=\sum_i^n[y_i-\overline{y}+\beta_1\overline{x}-\beta_1x_i]^2\\
+        &=\sum_i^n(y_i-\overline{y})^2+2\sum_i^n(y_i-\overline{y})(\beta_1\overline{x}-\beta_1x_i)
+        +\sum_i^n(\beta_1\overline{x}-\beta_1x_i)^2\\
+        &=\sum_i^n(y_i-\overline{y})^2+\sum_i^n(\beta_1\overline{x}-\beta_1x_i)^2\\
+        &=\sum_i^n(y_i-\overline{y})^2+\beta_1^2\sum_i^n(\overline{x}-x_i)^2\\
+        &=\sum_i^n(x_i-\overline{x})^2\left(\beta_1-\frac{\sum(x_i-\overline{x})(y_i-\overline{y})}{\sum(x_i-\overline{x})^2}\right)^2
+        +\sum_i^n(y_i-\overline{y})^2-\frac{(\sum(x_i-\overline{x})(y_i-\overline{y}))^2}{\sum(x_i-\overline{x})^2}\\
+        &\Rightarrow \widehat{\beta}_1=\frac{\sum(x_i-\overline{x})(y_i-\overline{y})}{\sum(x_i-\overline{x})^2}\\
         \end{split}
     \]
 
@@ -314,7 +320,7 @@
         &L(\beta_1,\sigma)=\prod \limits_{i}^{n} \frac{1}{\sigma \sqrt{2\pi}}exp\left(-\frac{(Y_i-\beta_1X_i)^2}{2\sigma^2}\right)\\
         &=\frac{1}{(\sigma \sqrt{2\pi})^n} exp\left(-\frac{\sum\limits_{i}^{n} (Y_i-\beta_1X_i)^2}{2\sigma^2}\right)\\
         &\text{in order to maximize $L(\beta_1,\sigma)$, we simply only need to minimize $\sum\limits_{i}^{n} (Y_i-\beta_1X_i)^2$}\\
-        &\text{now it becomes the same problem as least square estimate,therefore the two estimator of $\beta_1$ are}\\
+        &\text{now it becomes the same problem as least square estimate, therefore the two estimator of $\beta_1$ are}\\
         &\text{identical.}\\
         &\widehat{\beta}_1=\frac{\sum\limits _i^n(x_i-\overline{x})(y_i-\overline{y})}{\sum\limits _i^n(x_i-\overline{x})^2}\\
         \end{split}
@@ -340,9 +346,12 @@
 \end{homeworkProblem}
 
 \begin{homeworkProblem}     %8
-
-    \[\text{Firstly we get the observation data. Y is number of active physicians and X is the combination of the}\]
-    \text{three predictor variables.}
+    \[
+    \begin{split}
+    &\text{Firstly we get the observation data. Let d be the raw data. Y is number of active physicians }\\
+        \text{and X}&\text{ is the combination of the three predictor variables.}\\
+    \end{split}
+    \]
     \begin{verbatim}
     Y <- d$`Number of active physicians`
     X <- cbind(d$`Total population`, d$`Number of hospital beds`, d$`Total personal income`)
@@ -360,7 +369,7 @@
     \end{verbatim}
     \[~~~~\includegraphics[width=4.3in,height=2in]{reg_hw1_pic2.jpg}\\\]
     \[
-        ~~~~\text{we get the regression function }Y=110.6+2.795\times10^{-3}X
+        ~~~~\text{we get the regression function }Y=-110.6+2.795\times10^{-3}X
     \]
 
     \[
@@ -536,8 +545,8 @@
         MSE4 <- sum(lm.cdi4$residuals^2)/lm.cdi4$df.residual
         [1] 8214318
     \end{verbatim}
-    \text{ from the results above, we can conclude that the variable around the fitted regression line approximately}\\
-    \text{the same for the region \#1,2,4. But the variable for region \#3 is a little larger than the other three. }
+    \text{ from the results above, we can conclude that the variable around the fitted regression line differs }\\
+    \text{from each other. But the variable for region \#1 and \#3 are approximately the same.}
 \end{homeworkProblem}
 
 
