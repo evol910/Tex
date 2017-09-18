@@ -1,4 +1,4 @@
-\documentclass[a4paper,fleqn]{article}
+\documentclass[letterpaper]{article}
 
 \usepackage{fancyhdr}
 \usepackage{extramarks}
@@ -143,37 +143,34 @@
 \begin{homeworkProblem}     %1
 
     \textbf{a.}
+    \begin{verbatim}
+    da = read.table("CH01PR19.txt")
+    lm.pr19<-lm(da$V1~da$V2)
+    summary(lm.pr19)   \end{verbatim}
+    ~~~~~~\includegraphics[width=4in]{reg_hw1_pic12.jpg}
     \[
         \begin{split}
-            &\widehat{\beta}_1=\frac{\sum(x_i-\overline{x})(y_i-\overline{y})}{(x_i-\overline{x})^2}
-            \\
-            &\overline{x}=\sum x_i =22.5\\
-            &\overline{y}=\sum y_i =3.380\\
-            &\widehat{\beta}_1=\frac{\sum(x_i-22.5)(y_i-3.380)}{(x_i-22.5)^2}\\
-            &=\frac{7.562}{207.5}=0.036\\
-            &\widehat{\beta}_0=\overline{y}-\widehat{\beta}_1*\overline{x}
-            =3.380-0.036*22.5=2.560\\
-            &therefore~y=2.560+0.036x
+            &therefore~\widehat{y}=2.44105+0.03883x
             \\
         \end{split}
     \]
 
     \textbf{b.}
-
-    \includegraphics[height=4in]{reg_hw1_pic1}
+    ~~~~~~\includegraphics[height=3.5in]{reg_hw1_pic13.jpg}
 
     \[
         \begin{split}
-            &\text{when x=28, there are 3 possible y. so x and y are likely uncorrelated. }\\
-            &\text{We can draw conclusion from the plot above that the function does not fit the data.}
+            &\text{when a x is fixed, there could be some different possible y. so the relation between x and y could.}\\
+            &\text{not be linear. We can draw conclusion from the plot above that the function does not fit the data.}
         \end{split}
     \]
     \textbf{c.}
 
     \[
         \begin{split}
-            \widehat{y}&=\beta_0+\beta_1*x\\
-            &=2.560+0.036*30=3.64
+        &\text{When X=30, we apply the function in (a)}\\
+        &\widehat{y}=\beta_0+\beta_1*x\\
+        &=2.11405+0.03883*30=3.27895
         \end{split}
     \]
 
@@ -181,7 +178,7 @@
 
     \[
         \begin{split}
-            \Delta y=&y_1-y_2=(2.560+0.036*x)-(2.560+0.036*(x+1))=0.036
+            \Delta y=&y_1-y_2=(2.11405+0.03883*x)-(2.11405+0.03883*(x+1))=0.03883
         \end{split}
     \]
 
@@ -502,20 +499,30 @@
         &\text{Let R3 = 1 if in region 3; otherwise 0;}\\
         &\text{Let X,Y be the }\textbf{per capita income}\text{ and}\textbf{ total population }\text{,respectively.}\\
         &\text{Then we apply full model }\\
-        &Y=\beta_0+\beta_1X+\beta_2R1+\beta_3R2+\beta_3R3+\varepsilon\\
-        &\text{If there is no region effect, then the reduced model is}\\
-        &Y=\beta_0+\beta_1X+\varepsilon\\
-        &\text{for the full model,we have}\\
+        &Y=\beta_0+\beta_1X+\beta_2R1X+\beta_3R2X+\beta_3R3X+\varepsilon\\
         \end{split}
     \]
         \begin{verbatim}
+        > lm.full <- lm(Y~X+R1*X+R2*X+R3*X)
+        \end{verbatim}
+    \[
+        \begin{split}
+        &\text{If there is no region effect, then the reduced model is}\\
+        &Y=\beta_0+\beta_1X+\varepsilon\\
+        \end{split}
+    \]
+    \begin{verbatim}
+        > lm.reduce <- lm(Y~X)
+    \end{verbatim}
+        For the full model,we have\\
+        \begin{verbatim}
         > sum(lm.full$residuals^2)
-        [1] 3496250017
+        [1] 2945664166
         > lm.full$df.residual
         [1] 432
         \end{verbatim}
         \[~~~~~~~~~~~~SSE=3496250017~~~~~~DF=432\]
-        \text{~~~~~~~~~~~~For the reduced model,we have}
+        For the reduced model,we have
         \begin{verbatim}
         > sum(lm.reduce$residuals^2)
         [1] 3735858256
@@ -523,7 +530,7 @@
         [1] 438
         \end{verbatim}
         \[~~~~~~~~~~~~SSE=3735858256~~~~~~DF=438\]
-        Thus\[F^*=\frac{(3735858256-3496250017)/(438-432)}{3496250017/432}\]
+        Thus\[F^*=\frac{(3735858256-2945664166)/(438-432)}{2945664166/432}\]
         \[~~~~=19.31448>F_{95\%}(6,432)=2.12\]\\
         \textbf{Therefore, region matters, which means different region have different regression functions.}\\
 
