@@ -199,10 +199,10 @@
     \[
         \begin{split}
             &\text{list possible situations as (A2345)...(10JQKA),we know there are 10 choices of value and}\\
-            &\text{4 choices of suit.}\\
+            &\text{4 choices of suit. But we should exclude Royal Flush}\\
             \\
-            &P= \frac{10*4}{\left( \begin{array}{c}52\\5\end{array} \right)}\\
-            &~~=\frac{1}{64974}
+            &P= \frac{10*4-4}{\left( \begin{array}{c}52\\5\end{array} \right)}\\
+            &~~\approx 1.39\times 10^{-5}\\
         \end{split}
     \]
     \textbf{(c)}
@@ -223,9 +223,10 @@
             &\text{since the 5 cards have same suits, they should not have same value}\\
             &\text{there are }\left( \begin{array}{c}13\\5\end{array} \right)\text{ choices of value}\\
             &\text{there are 4 choices of suit}\\
+            &\text{What's more, we should exclude Royal Flush and Straight Flush}
             \\
-            &P= \frac{\left( \begin{array}{c}13\\5\end{array} \right)*4}{\left( \begin{array}{c}52\\5\end{array} \right)}\\
-            &~~=\frac{33}{16660}
+            &P= \frac{\left( \begin{array}{c}13\\5\end{array} \right)*4-4-36}{\left( \begin{array}{c}52\\5\end{array} \right)}\\
+            &~~=\frac{1277}{649740}\approx1.97\times 10^{-3}\\
         \end{split}
     \]
 
@@ -459,7 +460,7 @@
         \begin{split}
         &\text{denote the event a silver coin is found as E}\\
         &Pr(E)=\frac{1}{3}*\frac{1}{2}+\frac{1}{3}*1=\frac{1}{2}\\
-        &\text{denote the event two silver coins ia found as F}\\
+        &\text{denote the event two silver coins is found as F}\\
         &Pr(F)=\frac{1}{3}\\
         &Pr(F|E)=\frac{Pr(F\cap E)}{Pr(E)}\\
         &=\frac{Pr(F)}{Pr(E)}=\frac{\frac{1}{3}}{\frac{1}{2}}=\frac{2}{3}\\
@@ -502,8 +503,11 @@
 
     \[
         \begin{split}
-        &\text{from the above venn  diagram,we come to the following conclusion:}\\
-        &\text{1) when A and B are independent, then}~Pr(A\cap B)~\text{get the minimum value 0.}\\
+        &\text{from the above venn diagram,we come to the following conclusion:}\\
+        &\text{As for the right diagram, there is no intersection between A and B, but Pr(A)+Pr(B)=1.1$>$1, so}\\
+        &\text{there should be intersection}\\
+        &\text{1) when A and B have the smallest intersection, }~Pr(A\cup B)=1\\
+        &Pr(A\cap B)=Pr(A)+Pr(B)-Pr(A\cup B)=0.1\\
         &\text{2) when B is a sub set of A, then}~Pr(A\cap B)~\text{get the maximum value 0.7.}\\
         \end{split}
     \]
@@ -526,16 +530,13 @@
 \begin{homeworkProblem}     %14    #7 on page 32.
     \[
         \begin{split}
-        &\text{the number in sample space should be}
-        \left(\begin{array}{c}12+20-1\\12 \end{array} \right)
-        =\left(\begin{array}{c}31\\12 \end{array} \right)\\
+        &\text{the number in sample space should be}20^12\\
         &\text{the situation that no box have more than one ball is the same as there are}\\
-        &\text{ 12 boxes with one box each only and 8 empty boxes}\\
+        &\text{ 12 boxes with one box each only and 8 empty boxes,but order matters.}\\
         &\text{so number of choices of this situation is }
-        \left(\begin{array}{c}20\\12\end{array}\right)\\
-        &therefore~P=\frac{\left(\begin{array}{c}20\\12\end{array}\right)}
-        {\left(\begin{array}{c}31\\12\end{array}\right)}\\
-        &=\frac{646}{723695}\\
+        \begin{array}{c}20!\\12!\end{array}\\
+        &therefore~P=\frac{\left(\begin{array}{c}20!\\12!\end{array}\right)}{20^12}\\
+        &=1.24\times10^{-6}\\
         \end{split}
     \]
 
@@ -584,7 +585,7 @@
         &\text{the number in sample space should be}
         \left(\begin{array}{c}30*3\\10 \end{array} \right)\\
         &\text{number of choices of missing one color is }
-        \left(\begin{array}{c}30*2\\10\end{array}\right)-2*
+        3\times\left(\begin{array}{c}30*3\times2\\10\end{array}\right)-2*
         \left(\begin{array}{c}30\\10\end{array}\right)\\
         &\text{number of choices of missing two color is }
         3*\left(\begin{array}{c}30\\10\end{array}\right)\\
@@ -592,7 +593,7 @@
         \left(\begin{array}{c}30\\10\end{array}\right)
         +3*\left(\begin{array}{c}30\\10\end{array}\right)}
         {\left(\begin{array}{c}30*3\\10 \end{array} \right)}\\
-        &=\frac{9734}{738289}\approx 0.0132
+        &=\frac{2357}{59590}\approx 0.040
         \end{split}
     \]
 
